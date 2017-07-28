@@ -1,6 +1,8 @@
 CLI_DIR:=$(CURDIR)/components/cli
 ENGINE_DIR:=$(CURDIR)/components/engine
 PACKAGING_DIR:=$(CURDIR)/components/packaging
+RCE_DIR:=$(CURDIR)/rce
+
 VERSION=$(shell cat VERSION)
 
 help: ## show make targets
@@ -21,7 +23,11 @@ rpm: ## build rpm packages
 static: ## build static packages
 	$(MAKE) VERSION=$(VERSION) CLI_DIR=$(CLI_DIR) ENGINE_DIR=$(ENGINE_DIR) -C $(PACKAGING_DIR) static
 
+static-rce: ## build rce packages
+	$(MAKE) VERSION=$(VERSION) RCE_DIR=$(RCE_DIR) -C $(PACKAGING_DIR) rce
+
 clean: ## clean the build artifacts
 	-$(MAKE) -C $(CLI_DIR) clean
 	-$(MAKE) -C $(ENGINE_DIR) clean
 	-$(MAKE) -C $(PACKAGING_DIR) clean
+	-$(MAKE) -C $(RCE_DIR) clean

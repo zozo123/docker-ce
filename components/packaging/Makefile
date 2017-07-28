@@ -31,3 +31,9 @@ static: ## build static-compiled packages
 	for p in $(DOCKER_BUILD_PKGS); do \
 		$(MAKE) -C $@ VERSION=$(VERSION) ENGINE_DIR=$(ENGINE_DIR) CLI_DIR=$(CLI_DIR) $${p}; \
 	done
+
+rce: DOCKER_BUILD_PKGS:=static-linux cross-arm
+rce: ## build static-compiled packages
+	for p in $(DOCKER_BUILD_PKGS); do \
+		$(MAKE) -C $@ VERSION=$(VERSION) RCE_DIR=$(RCE_DIR) $${p}; \
+	done
